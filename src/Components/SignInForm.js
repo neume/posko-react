@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import qs from 'qs';
+import config from '../config'
 
 
 export default class SignInForm extends React.Component {
   constructor() {
     super()
-    this.base_url = 'http://localhost:3001'
     this.state = {
       account_name: 'example',
       email: 'posko@example.com',
@@ -18,7 +18,7 @@ export default class SignInForm extends React.Component {
 
     axios({
       method: 'post',
-      url: `${this.base_url}/sign_in`,
+      url: `${config.url}/sign_in`,
       withCredentials: true,
       data: qs.stringify(this.state),
       headers: {
@@ -28,10 +28,10 @@ export default class SignInForm extends React.Component {
         return status < 500; // Reject only if the status code is greater than or equal to 500
       }
     })
-    .then(function (response) {
-      console.log(response)
+    .then( () => {
+      window.location.href = '/dashboard'
     })
-    .catch(function(error) {
+    .catch((error) => {
       console.log(error)
     })
   }
