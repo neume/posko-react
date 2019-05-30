@@ -2,9 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import qs from 'qs';
 import config from '../config'
+import { signInAction } from '../actions/sessionActions';
 
 
-export default class SignInForm extends React.Component {
+
+class SignInForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -29,13 +31,14 @@ export default class SignInForm extends React.Component {
       }
     })
     .then( () => {
+      this.props.signInAction()
       window.location.href = '/dashboard'
     })
     .catch((error) => {
       console.log(error)
     })
   }
-  
+
   handleChange = (e) => {
     let name = e.target.name
     let value = e.target.value
@@ -48,7 +51,7 @@ export default class SignInForm extends React.Component {
     <div>
       <div>
         <label> Account Name</label>
-        <input      
+        <input
           type='text'
           name='account_name'
           onChange={this.handleChange}
@@ -80,6 +83,13 @@ export default class SignInForm extends React.Component {
         Sign In
       </button>
     </div>
-    ) 
+    )
   }
 }
+
+const mapStateToProps = state => ({
+  posts: state.posts.items,
+  newPost: state.posts.item
+});
+
+export default connect(mapStateToProps, { signInAction })(SignInForm);
