@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  backend:
+    image: neume/posko:0.0.1.1
+    command: bundle exec rails s -b 0.0.0.0 -p 5000
+    ports:
+      - "5000:5000"
+    environment:
+      - POSKO_DATABASE_HOST=db
+      - POSKO_DATABASE_USERNAME=postgres
+      - POSKO_DATABASE_PASSWORD=''
+    depends_on:
+      - db
+  frontend:
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - backend
