@@ -22,6 +22,6 @@ export default class DataSource {
     .then((result) => {
       return result.data.products
     })
-    return result 
+    return result
   }
 }

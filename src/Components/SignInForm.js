@@ -6,7 +6,7 @@ import { signInAction } from '../actions/sessionActions';
 
 
 
-class SignInForm extends React.Component {
+export default class SignInForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -31,7 +31,7 @@ class SignInForm extends React.Component {
       }
     })
     .then( () => {
-      this.props.signInAction()
+      // this.props.signInAction()
       window.location.href = '/dashboard'
     })
     .catch((error) => {
@@ -92,4 +92,4 @@ const mapStateToProps = state => ({
   newPost: state.posts.item
 });
 
-export default connect(mapStateToProps, { signInAction })(SignInForm);
+// export default connect(mapStateToProps, { signInAction })(SignInForm);
