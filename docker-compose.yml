@@ -14,7 +14,7 @@ services:
       - POSKO_DATABASE_USERNAME=postgres
       - POSKO_DATABASE_PASSWORD=
       - SECRET_KEY_BASE=example
-      - POSKO_CORS_ORIGIN=http://localhost:3000
+      - POSKO_CORS_ORIGIN=http://lvh.me:3000
       - RAILS_LOG_TO_STDOUT=true
     depends_on:
       - db

@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import qs from 'qs';
+import qs from 'qs'
 import config from '../config'
-import { signInAction } from '../actions/sessionActions';
+// import { connect } from 'react-redux'
+import { signInAction } from '../actions/sessionActions'
 
 
-
-export default class SignInForm extends React.Component {
+export class SignInForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -31,7 +31,7 @@ export default class SignInForm extends React.Component {
       }
     })
     .then( () => {
-      // this.props.signInAction()
+      this.props.signInAction(this.state)
       window.location.href = '/dashboard'
     })
     .catch((error) => {
@@ -87,9 +87,9 @@ export default class SignInForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.posts.items,
-  newPost: state.posts.item
-});
+// const mapStateToProps = state => ({
+//   posts: state.posts.items,
+//   newPost: state.posts.item
+// });
 
 // export default connect(mapStateToProps, { signInAction })(SignInForm);
